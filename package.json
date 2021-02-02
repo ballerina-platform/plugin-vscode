@@ -62,6 +62,21 @@
             "type": "object",
             "title": "Ballerina",
             "properties": {
+                "ballerina.formattingOptions.tabsize": {
+                    "type": "number",
+                    "default": 4,
+                    "description": "Specifies the tab size when formatting ballerina code (Supports for Swan-Lake-Alpha-2 onwards)"
+                },
+                "ballerina.formattingOptions.columnLimit": {
+                    "type": "number",
+                    "default": 120,
+                    "description": "Specifies the column limit when formatting ballerina code (Supports for Swan-Lake-Alpha-2 onwards)"
+                },
+                "ballerina.formattingOptions.whitespaceCharacter": {
+                    "type": "string",
+                    "default": " ",
+                    "description": "Specifies the whitespace character (\" \") when formatting ballerina code (Supports for Swan-Lake-Alpha-2 onwards)"
+                },
                 "ballerina.plugin.dev.mod": {
                     "type": "boolean",
                     "default": false,
