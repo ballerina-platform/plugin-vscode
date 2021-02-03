@@ -21,7 +21,7 @@
 import {
     workspace, window, commands, languages, Uri,
     ConfigurationChangeEvent, extensions,
-    Extension, ExtensionContext, IndentAction, WebviewPanel, OutputChannel,
+    Extension, ExtensionContext, IndentAction, WebviewPanel, OutputChannel, StatusBarItem, StatusBarAlignment
 } from "vscode";
 import {
     INVALID_HOME_MSG, INSTALL_BALLERINA, DOWNLOAD_BALLERINA, MISSING_SERVER_CAPABILITY,
@@ -33,7 +33,7 @@ import { exec, spawnSync } from 'child_process';
 import { LanguageClientOptions, State as LS_STATE, RevealOutputChannelOn, ServerOptions } from "vscode-languageclient";
 import { getServerOptions, getOldServerOptions, getOldCliServerOptions } from '../server/server';
 import { ExtendedLangClient } from './extended-language-client';
-import { log, getOutputChannel } from '../utils/index';
+import { log, getOutputChannel, outputChannel } from '../utils/index';
 import { AssertionError } from "assert";
 import { OVERRIDE_BALLERINA_HOME, BALLERINA_HOME, ALLOW_EXPERIMENTAL, ENABLE_DEBUG_LOG, ENABLE_TRACE_LOG } from "./preferences";
 import TelemetryReporter from "vscode-extension-telemetry";
@@ -63,6 +63,8 @@ export class BallerinaExtension {
     private clientOptions: LanguageClientOptions;
     public langClient?: ExtendedLangClient;
     public context?: ExtensionContext;
+    private sdkVersion: StatusBarItem;
+
     private webviewPanels: {
         [name: string]: WebviewPanel;
     };
@@ -71,6 +73,11 @@ export class BallerinaExtension {
         this.ballerinaHome = '';
         this.ballerinaCmd = '';
         this.webviewPanels = {};
+        this.sdkVersion = window.createStatusBarItem(StatusBarAlignment.Left, 100);
+        this.sdkVersion.text = `Ballerina SDK: Detecting`;
+        this.sdkVersion.command = `ballerina.showLogs`
+
+        this.sdkVersion.show();
         // Load the extension
         this.extension = extensions.getExtension(EXTENSION_ID)!;
         this.clientOptions = {
@@ -87,6 +94,12 @@ export class BallerinaExtension {
     }
 
     init(onBeforeInit: Function): Promise<void> {
+        // Register show logs command.
+        const showLogs = commands.registerCommand('ballerina.showLogs', () => {
+            outputChannel.show();
+        });
+        this.context!.subscriptions.push(showLogs);
+
         try {
             // Register pre init handlers.
             this.registerPreInitHandlers();
@@ -132,6 +145,8 @@ export class BallerinaExtension {
             return this.getBallerinaVersion(this.ballerinaHome, this.overrideBallerinaHome()).then(ballerinaVersion => {
                 ballerinaVersion = ballerinaVersion.split('-')[0];
                 log(`Plugin version: ${pluginVersion}\nBallerina version: ${ballerinaVersion}`);
+                this.sdkVersion.text = `Ballerina SDK: ${ballerinaVersion}`;
+
                 this.checkCompatibleVersion(pluginVersion, ballerinaVersion);
 
                 if (ballerinaVersion.match(SWAN_LAKE_REGEX)) {
@@ -186,6 +201,7 @@ export class BallerinaExtension {
             // If any failure occurs while initializing show an error message
             this.showPluginActivationError();
             this.telemetryReporter.sendTelemetryException(ex, { error: msg });
+            this.sdkVersion.text = `Ballerina SDK: Unknown`;
             return Promise.reject(msg);
         }
     }

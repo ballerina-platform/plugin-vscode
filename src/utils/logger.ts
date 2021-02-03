@@ -19,7 +19,7 @@
  */
 import * as vscode from 'vscode';
 
-const outputChannel = vscode.window.createOutputChannel("Ballerina");
+export const outputChannel = vscode.window.createOutputChannel("Ballerina");
 const logLevelDebug: boolean = vscode.workspace.getConfiguration('ballerina').get('debugLog') === true;
 
 function withNewLine(value: string) {
