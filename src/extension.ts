@@ -20,7 +20,7 @@
 import { ExtensionContext, commands, window, Location, Uri } from 'vscode';
 import { ballerinaExtInstance } from './core';
 // import { activate as activateAPIEditor } from './api-editor';
-// import { activate as activateDiagram } from './diagram'; 
+import { activate as activateDiagram } from './diagram'; 
 import { activate as activateBBE } from './bbe';
 // import { activate as activateTraceLogs } from './trace-logs';
 import { activateDebugConfigProvider } from './debugger';
@@ -70,7 +70,7 @@ export function activate(context: ExtensionContext): Promise<any> {
         // start the features.
         // Enable Ballerina diagram
         // TODO: Remove the deprecated diagram extension. Avoid activating for now. 
-        // activateDiagram(ballerinaExtInstance);
+        activateDiagram(ballerinaExtInstance);
         // Enable Ballerina by examples
         activateBBE(ballerinaExtInstance);
         // Enable Network logs

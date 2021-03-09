@@ -249,6 +249,15 @@
                 "command": "ballerina.project.add",
                 "title": "Add Module",
                 "category": "Ballerina"
+            },
+            {
+                "command": "ballerina.show.diagram",
+                "title": "Show Diagram Editor",
+                "icon": {
+                    "dark": "./resources/images/icons/design-view-inverse.svg",
+                    "light": "./resources/images/icons/design-view.svg"
+                },
+                "category": "Ballerina"
             }
         ]
     },
