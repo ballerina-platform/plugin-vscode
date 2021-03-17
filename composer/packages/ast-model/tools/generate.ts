@@ -2,8 +2,10 @@ import * as fs from "fs";
 import { sync as globSync } from "glob";
 import * as path from "path";
 import { fix } from "prettier-tslint";
-import { findModelInfo, genBaseVisitorFileCode, genCheckKindUtilCode,
-    genInterfacesFileCode } from "./generators";
+import {
+    findModelInfo, genBaseVisitorFileCode, genCheckKindUtilCode,
+    genInterfacesFileCode
+} from "./generators";
 import { genAST, shutdown } from "./lang-client";
 
 if (!fs.existsSync(path.join(process.cwd(), "..", "..", "..", "examples"))) {
@@ -54,7 +56,7 @@ function processPart(start: number, count: number) {
 
         const timeout = new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve();
+                resolve(true);
             }, 20000);
         });
         astPromises.push(Promise.race([promise, timeout]));
