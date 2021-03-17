@@ -18,6 +18,8 @@
 import * as React from "react";
 import { Input } from "semantic-ui-react";
 import { BallerinaExampleCategory } from "./model";
+// tslint:disable-next-line:ordered-imports
+import DiagramGenerator from "@drifftr/ballerina-low-code-editor";
 
 // export interface SamplesListState {
 //     samples?: BallerinaExampleCategory[];
@@ -43,9 +45,13 @@ export class Diagram extends React.Component<DiagramProps> {
 
     // private availableSamples: undefined | BallerinaExampleCategory[];
     private searchInput: Input | undefined;
+    private languageClient: any;
+    // private filePath: string;
 
     constructor(props: DiagramProps) {
         super(props);
+        this.languageClient = props.editorProps.langClient;
+        // this.filePath = "/Users/prabushi/Documents/wso2/test/alpha2s/new/examples/examples/hello_world.bal";
     }
 
     public componentDidMount() {
@@ -87,6 +93,6 @@ export class Diagram extends React.Component<DiagramProps> {
     }
 
     public render() {
-        return (<h1>Hello Diagram</h1>);
+        return (<DiagramGenerator langClient={this.languageClient} syntaxTree={this.languageClient} />);
     }
 }

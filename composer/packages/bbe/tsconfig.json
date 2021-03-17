@@ -1,8 +1,10 @@
 {
-    "extends": "../../configs/common.tsconfig.json",
-    "compilerOptions": {
-      "rootDirs": ["src", "stories"],
-      "outDir": "lib"
-    }
+  "extends": "../../configs/common.tsconfig.json",
+  "compilerOptions": {
+    "rootDirs": [
+      "src",
+      "stories"
+    ],
+    "outDir": "lib"
+  }
 }
-  
