@@ -276,7 +276,7 @@
         "lint": "tslint --fix 'src/**/*{.ts,.tsx}'"
     },
     "dependencies": {
-        "@drifftr/ballerina-low-code-editor": "file:../../../../../../Desktop/test1/package",
+        "@drifftr/ballerina-low-code-editor": "file:../../../../../../Desktop/test2/package",
         "@types/js-base64": "^2.3.1",
         "cross-env": "^5.2.0",
         "dom-parser": "^0.1.6",

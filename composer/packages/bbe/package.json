@@ -16,7 +16,7 @@
     "storybook": "composer pkg:storybook"
   },
   "dependencies": {
-    "@drifftr/ballerina-low-code-editor": "file:../../../../../../../../../Desktop/test1/package",
+    "@drifftr/ballerina-low-code-editor": "file:../../../../../../../../../Desktop/test2/package",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
