@@ -46,12 +46,12 @@ export class Diagram extends React.Component<DiagramProps> {
     // private availableSamples: undefined | BallerinaExampleCategory[];
     private searchInput: Input | undefined;
     private languageClient: any;
-    // private filePath: string;
+    private filePath: string;
 
     constructor(props: DiagramProps) {
         super(props);
         this.languageClient = props.editorProps.langClient;
-        // this.filePath = "/Users/prabushi/Documents/wso2/test/alpha2s/new/examples/examples/hello_world.bal";
+        this.filePath = "/Users/prabushi/Documents/wso2/test/alpha2s/new/examples/examples/hello_world.bal";
     }
 
     public componentDidMount() {
@@ -93,6 +93,6 @@ export class Diagram extends React.Component<DiagramProps> {
     }
 
     public render() {
-        return (<DiagramGenerator langClient={this.languageClient} syntaxTree={this.languageClient} />);
+        return (<DiagramGenerator langClient={this.languageClient} filePath={this.filePath} />);
     }
 }
