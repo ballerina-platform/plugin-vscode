@@ -16,23 +16,24 @@
  * under the License.
  *
  */
-import { commands, window, Uri, ViewColumn, ExtensionContext, TextEditor, WebviewPanel } from 'vscode';
+import { commands, window, Uri, ViewColumn, ExtensionContext, WebviewPanel } from 'vscode';
 import * as _ from 'lodash';
 import { render } from './renderer';
 import { ExtendedLangClient } from '../core/extended-language-client';
 import { BallerinaExtension } from '../core';
-import { WebViewRPCHandler, getCommonWebViewOptions } from '../utils';
+import { getCommonWebViewOptions } from '../utils';
 import { join } from "path";
 import {
-	TM_EVENT_OPEN_DIAGRAM, TM_EVENT_ERROR_OLD_BAL_HOME_DETECTED, CMP_DIAGRAM_VIEW, sendTelemetryEvent, sendTelemetryException
+	TM_EVENT_OPEN_DIAGRAM, TM_EVENT_ERROR_OLD_BAL_HOME_DETECTED, TM_EVENT_ERROR_EXECUTE_DIAGRAM_OPEN, CMP_DIAGRAM_VIEW,
+	sendTelemetryEvent, sendTelemetryException
 } from '../telemetry';
 
 // const DEBOUNCE_WAIT = 500;
 
 let diagramViewPanel: WebviewPanel | undefined;
-let activeEditor: TextEditor | undefined;
+// let activeEditor: TextEditor | undefined;
 // let preventDiagramUpdate = false;
-let rpcHandler: WebViewRPCHandler;
+// let rpcHandler: WebViewRPCHandler;
 
 // function updateWebView(docUri: Uri): void {
 // 	if (rpcHandler) {
@@ -40,7 +41,7 @@ let rpcHandler: WebViewRPCHandler;
 // 	}
 // }
 
-export function showDiagramEditor(context: ExtensionContext, langClient: ExtendedLangClient, startLine: number,
+export function showDiagramEditor(context: ExtensionContext, ballerinaExtInstance: BallerinaExtension, startLine: number,
 	startColumn: number, endLine: number, endColumn: number, filePath: string = ''): void {
 	// const didChangeDisposable = workspace.onDidChangeTextDocument(
 	// 	_.debounce((e: TextDocumentChangeEvent) => {
@@ -85,11 +86,25 @@ export function showDiagramEditor(context: ExtensionContext, langClient: Extende
 	// if (!editor) {
 	// 	return;
 	// }
-	activeEditor = editor;
-	rpcHandler = WebViewRPCHandler.create(diagramViewPanel, langClient);
+	// activeEditor = editor;
+	// WebViewRPCHandler.create(diagramViewPanel, langClient);
 	let treeItemPath: Uri;
-	filePath === '' && editor ? treeItemPath = editor.document.uri : treeItemPath = Uri.file(filePath);
-	const html = render(treeItemPath, startLine, startColumn, endLine, endColumn);
+	if (filePath === '') {
+		if (!editor || !window.activeTextEditor || !window.activeTextEditor.document.fileName.endsWith('.bal')) {
+			const message = 'Current file is not a ballerina file.';
+			sendTelemetryEvent(ballerinaExtInstance, TM_EVENT_ERROR_EXECUTE_DIAGRAM_OPEN, CMP_DIAGRAM_VIEW, message);
+			if (diagramViewPanel) {
+				diagramViewPanel.dispose();
+			}
+			window.showErrorMessage(message);
+			return;
+		}
+		treeItemPath = editor!.document.uri;
+	} else {
+		treeItemPath = Uri.file(filePath);
+	}
+
+	const html = render(treeItemPath!, startLine, startColumn, endLine, endColumn);
 	if (diagramViewPanel && html) {
 		diagramViewPanel.webview.html = html;
 	}
@@ -122,7 +137,7 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
 					ballerinaExtInstance.showMessageServerMissingCapability();
 					return {};
 				}
-				showDiagramEditor(context, langClient, 0, 0, -1, -1);
+				showDiagramEditor(context, ballerinaExtInstance, 0, 0, -1, -1);
 			})
 			.catch((e) => {
 				ballerinaExtInstance.showPluginActivationError();

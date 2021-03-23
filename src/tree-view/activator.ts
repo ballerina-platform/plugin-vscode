@@ -56,7 +56,7 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
     ballerinaExtInstance.onPackageTreeElementClicked((construct: ConstructIdentifier) => {
         // openBallerinaFile(construct);
         if (construct.kind === PROJECT_KIND.FUNCTION || construct.kind === PROJECT_KIND.RESOURCE) {
-            showDiagramEditor(ballerinaExtInstance.context!, ballerinaExtInstance.langClient!, construct.startLine,
+            showDiagramEditor(ballerinaExtInstance.context!, ballerinaExtInstance, construct.startLine,
                 construct.startColumn, construct.endLine, construct.endColumn, construct.filePath);
         }
     });
