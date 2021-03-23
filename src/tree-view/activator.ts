@@ -19,7 +19,7 @@ import { BallerinaExtension, ConstructIdentifier } from "../core";
 import { showDiagramEditor } from '../diagram';
 import { sendTelemetryEvent, CMP_PACKAGE_VIEW, TM_EVENT_OPEN_PACKAGE_OVERVIEW } from "../telemetry";
 import { commands, window } from 'vscode';
-import { TREE_ELEMENT_EXECUTE_COMMAND, TREE_REFRESH_COMMAND } from "./model";
+import { PROJECT_KIND, TREE_ELEMENT_EXECUTE_COMMAND, TREE_REFRESH_COMMAND } from "./model";
 import { PackageOverviewDataProvider } from "./tree-data-provider";
 
 export function activate(ballerinaExtInstance: BallerinaExtension) {
@@ -55,8 +55,10 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
 
     ballerinaExtInstance.onPackageTreeElementClicked((construct: ConstructIdentifier) => {
         // openBallerinaFile(construct);
-        showDiagramEditor(ballerinaExtInstance.context!, ballerinaExtInstance.langClient!, construct.startLine,
-            construct.startColumn, construct.endLine, construct.endColumn, construct.filePath);
+        if (construct.kind === PROJECT_KIND.FUNCTION || construct.kind === PROJECT_KIND.RESOURCE) {
+            showDiagramEditor(ballerinaExtInstance.context!, ballerinaExtInstance.langClient!, construct.startLine,
+                construct.startColumn, construct.endLine, construct.endColumn, construct.filePath);
+        }
     });
 }
 

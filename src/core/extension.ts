@@ -363,15 +363,6 @@ export class BallerinaExtension {
         });
     }
 
-    showMessageOldPlugin(): any {
-        const download: string = 'Download';
-        window.showWarningMessage(OLD_PLUGIN_VERSION, download).then((selection) => {
-            if (download === selection) {
-                commands.executeCommand('vscode.open', Uri.parse(DOWNLOAD_BALLERINA));
-            }
-        });
-    }
-
     showMessageServerMissingCapability(): any {
         const download: string = 'Download';
         window.showErrorMessage(MISSING_SERVER_CAPABILITY, download).then((selection) => {

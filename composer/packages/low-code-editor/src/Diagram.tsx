@@ -53,19 +53,19 @@ export class Diagram extends React.Component<DiagramProps> {
     public render() {
         // return (<DiagramGenerator langClient={this.languageClient} syntaxTree={this.languageClient} />);
         return (<div>
-                    <h1>Hello Diagram</h1>
-                    <h2>languageClient: </h2>
-                    <p>{typeof this.languageClient}</p>
-                    <h2>filePath: </h2>
-                    <p>{this.filePath}</p>
-                    <h2>startLine: </h2>
-                    <p>{this.startLine}</p>
-                    <h2>startColumn: </h2>
-                    <p>{this.startColumn}</p>
-                    <h2>endLine: </h2>
-                    <p>{this.endLine}</p>
-                    <h2>endColumn: </h2>
-                    <p>{ this.endColumn }</p>
-                </div>);
+            <h1>Hello Diagram</h1>
+            <h2>languageClient: </h2>
+            <p>{this.languageClient}</p>
+            <h2>filePath: </h2>
+            <p>{this.filePath}</p>
+            <h2>startLine: </h2>
+            <p>{this.startLine}</p>
+            <h2>startColumn: </h2>
+            <p>{this.startColumn}</p>
+            <h2>endLine: </h2>
+            <p>{this.endLine}</p>
+            <h2>endColumn: </h2>
+            <p>{this.endColumn}</p>
+        </div>);
     }
 }

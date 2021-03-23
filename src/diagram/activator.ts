@@ -16,50 +16,52 @@
  * under the License.
  *
  */
-import { workspace, commands, window, Uri, ViewColumn, ExtensionContext, TextEditor, WebviewPanel, TextDocumentChangeEvent } from 'vscode';
+import { commands, window, Uri, ViewColumn, ExtensionContext, TextEditor, WebviewPanel } from 'vscode';
 import * as _ from 'lodash';
 import { render } from './renderer';
 import { ExtendedLangClient } from '../core/extended-language-client';
 import { BallerinaExtension } from '../core';
 import { WebViewRPCHandler, getCommonWebViewOptions } from '../utils';
 import { join } from "path";
-import { TM_EVENT_OPEN_DIAGRAM, CMP_DIAGRAM_VIEW, sendTelemetryEvent, sendTelemetryException } from '../telemetry';
+import {
+	TM_EVENT_OPEN_DIAGRAM, TM_EVENT_ERROR_OLD_BAL_HOME_DETECTED, CMP_DIAGRAM_VIEW, sendTelemetryEvent, sendTelemetryException
+} from '../telemetry';
 
-const DEBOUNCE_WAIT = 500;
+// const DEBOUNCE_WAIT = 500;
 
 let diagramViewPanel: WebviewPanel | undefined;
 let activeEditor: TextEditor | undefined;
-let preventDiagramUpdate = false;
+// let preventDiagramUpdate = false;
 let rpcHandler: WebViewRPCHandler;
 
-function updateWebView(docUri: Uri): void {
-	if (rpcHandler) {
-		rpcHandler.invokeRemoteMethod("updateAST", [docUri.toString()], () => { });
-	}
-}
+// function updateWebView(docUri: Uri): void {
+// 	if (rpcHandler) {
+// 		rpcHandler.invokeRemoteMethod("updateAST", [docUri.toString()], () => { });
+// 	}
+// }
 
 export function showDiagramEditor(context: ExtensionContext, langClient: ExtendedLangClient, startLine: number,
 	startColumn: number, endLine: number, endColumn: number, filePath: string = ''): void {
-	const didChangeDisposable = workspace.onDidChangeTextDocument(
-		_.debounce((e: TextDocumentChangeEvent) => {
-			if (activeEditor && (e.document === activeEditor.document) &&
-				e.document.fileName.endsWith('.bal')) {
-				if (preventDiagramUpdate) {
-					return;
-				}
-				updateWebView(e.document.uri);
-			}
-		}, DEBOUNCE_WAIT));
+	// const didChangeDisposable = workspace.onDidChangeTextDocument(
+	// 	_.debounce((e: TextDocumentChangeEvent) => {
+	// 		if (activeEditor && (e.document === activeEditor.document) &&
+	// 			e.document.fileName.endsWith('.bal')) {
+	// 			if (preventDiagramUpdate) {
+	// 				return;
+	// 			}
+	// 			updateWebView(e.document.uri);
+	// 		}
+	// 	}, DEBOUNCE_WAIT));
 
-	const changeActiveEditorDisposable = window.onDidChangeActiveTextEditor(
-		(activatedEditor: TextEditor | undefined) => {
-			if (window.activeTextEditor && activatedEditor
-				&& (activatedEditor.document === window.activeTextEditor.document)
-				&& activatedEditor.document.fileName.endsWith('.bal')) {
-				activeEditor = window.activeTextEditor;
-				updateWebView(activatedEditor.document.uri);
-			}
-		});
+	// const changeActiveEditorDisposable = window.onDidChangeActiveTextEditor(
+	// 	(activatedEditor: TextEditor | undefined) => {
+	// 		if (window.activeTextEditor && activatedEditor
+	// 			&& (activatedEditor.document === window.activeTextEditor.document)
+	// 			&& activatedEditor.document.fileName.endsWith('.bal')) {
+	// 			activeEditor = window.activeTextEditor;
+	// 			updateWebView(activatedEditor.document.uri);
+	// 		}
+	// 	});
 
 	if (diagramViewPanel) {
 		diagramViewPanel.dispose();
@@ -94,8 +96,8 @@ export function showDiagramEditor(context: ExtensionContext, langClient: Extende
 
 	diagramViewPanel.onDidDispose(() => {
 		diagramViewPanel = undefined;
-		didChangeDisposable.dispose();
-		changeActiveEditorDisposable.dispose();
+		// didChangeDisposable.dispose();
+		// changeActiveEditorDisposable.dispose();
 	});
 }
 
@@ -103,7 +105,13 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
 	const context = <ExtensionContext>ballerinaExtInstance.context;
 	const langClient = <ExtendedLangClient>ballerinaExtInstance.langClient;
 
-	const diagramRenderDisposable = commands.registerCommand('ballerina.showDiagram', () => {
+	const diagramRenderDisposable = commands.registerCommand('ballerina.show.diagram', () => {
+		if (!ballerinaExtInstance.isSwanLake) {
+			ballerinaExtInstance.showMessageOldBallerina();
+			sendTelemetryEvent(ballerinaExtInstance, TM_EVENT_ERROR_OLD_BAL_HOME_DETECTED, CMP_DIAGRAM_VIEW,
+				"Diagram Editor is not supported for the ballerina version.");
+			return;
+		}
 		sendTelemetryEvent(ballerinaExtInstance, TM_EVENT_OPEN_DIAGRAM, CMP_DIAGRAM_VIEW);
 		return ballerinaExtInstance.onReady()
 			.then(() => {
@@ -114,7 +122,7 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
 					ballerinaExtInstance.showMessageServerMissingCapability();
 					return {};
 				}
-				showDiagramEditor(context, langClient, 10, 20, 30, 40);
+				showDiagramEditor(context, langClient, 0, 0, -1, -1);
 			})
 			.catch((e) => {
 				ballerinaExtInstance.showPluginActivationError();
