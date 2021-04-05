@@ -39,7 +39,7 @@ export function getServerOptions(ballerinaCmd: string): ServerOptions {
         debug('Language Server is starting in debug mode.');
         let debugPort = 5005;
         opt.env.BAL_JAVA_DEBUG = debugPort;
-        opt.env.BAL_DEBUG_OPTS = "-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=" + debugPort + ",quiet=y";
+        opt.env.BAL_DEBUG_OPTS = "-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=" + debugPort + ",quiet=y";
     }
 
     if (process.env.LS_CUSTOM_CLASSPATH) {
