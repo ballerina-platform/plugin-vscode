@@ -6,7 +6,7 @@ import {
 } from "vscode-languageserver-protocol";
 import { BallerinaEndpoint } from "./ast-models";
 import {
-    BallerinaExampleListParams, BallerinaExampleListResponse, BallerinaProject, GetBallerinaProjectParams,
+    BallerinaProject, GetBallerinaProjectParams,
     GetProjectASTParams, GetProjectASTResponse, GetSyntaxTreeParams, GetSyntaxTreeResponse, GoToSourceParams,
     IBallerinaLangClient, RevealRangeParams
 } from "./model";
@@ -36,9 +36,9 @@ export class BallerinaLangClient implements IBallerinaLangClient {
         return this.lsConnection.sendRequest<GetSyntaxTreeResponse>("ballerinaDocument/syntaxTree", params);
     }
 
-    public fetchExamples(params: BallerinaExampleListParams = {}): Thenable<BallerinaExampleListResponse> {
-        return this.lsConnection.sendRequest("ballerinaExample/list", params);
-    }
+    // public fetchExamples(params: BallerinaExampleListParams = {}): Thenable<BallerinaExampleListResponse> {
+    //     return this.lsConnection.sendRequest("ballerinaExample/list", params);
+    // }
 
     public getEndpoints(): Thenable<BallerinaEndpoint[]> {
         return this.lsConnection.sendRequest("ballerinaSymbol/endpoints", {})

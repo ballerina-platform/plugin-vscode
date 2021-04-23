@@ -1,28 +1,15 @@
 {
-  "name": "@ballerina/ballerina-by-examples",
-  "version": "2.0.0-alpha3-SNAPSHOT",
-  "description": "Provides components for displaying Ballerina By Examples",
-  "main": "lib/src/index.js",
-  "scripts": {
-    "prepublishOnly": "npm run build",
-    "prebuild": "npm run clean && npm run lint",
-    "clean": "composer pkg:clean",
-    "lint": "composer pkg:lint",
-    "build": "composer pkg:build",
-    "test": "echo \"disabled\"",
-    "coverage": "composer pkg:test:coverage",
-    "watch": "composer pkg:watch",
-    "watch:test": "composer pkg:test:watch",
-    "storybook": "composer pkg:storybook"
-  },
-  "dependencies": {
-    "@drifftr/ballerina-low-code-editor": "file:../../../../../../../../../Desktop/test2/package",
-    "lodash": "^4.17.11"
-  },
-  "devDependencies": {
-    "@ballerina/composer-cli": "^2.0.0-alpha3-SNAPSHOT",
-    "@types/lodash": "^4.14.118"
-  },
-  "author": "ballerina.io",
-  "license": "Apache-2.0"
+	"name": "@ballerina/ballerina-by-examples",
+	"version": "2.0.0-alpha3-SNAPSHOT",
+	"description": "Provides components for displaying Ballerina By Examples",
+	"main": "lib/src/index.js",
+	"dependencies": {
+		"@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-23/4/wso2-enterprise-low-code-editor-1.0.2.tgz",
+		"lodash": "^4.17.11"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.118"
+	},
+	"author": "ballerina.io",
+	"license": "Apache-2.0"
 }

@@ -94,7 +94,7 @@ export interface IBallerinaLangClient {
 
     getSyntaxTree: (params: GetSyntaxTreeParams) => Thenable<GetSyntaxTreeResponse>;
 
-    fetchExamples: (params: BallerinaExampleListParams) => Thenable<BallerinaExampleListResponse>;
+    // fetchExamples: (params: BallerinaExampleListParams) => Thenable<BallerinaExampleListResponse>;
 
     getEndpoints: () => Thenable<BallerinaEndpoint[]>;
 

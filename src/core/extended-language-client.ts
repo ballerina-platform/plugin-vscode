@@ -18,14 +18,12 @@
  *
  */
 
-import { DocumentSymbol, DocumentSymbolParams, LanguageClient, SymbolInformation, TextDocumentPositionParams } from "vscode-languageclient";
+import { LanguageClient, TextDocumentPositionParams } from "vscode-languageclient";
 import { Uri, Location } from "vscode";
-import { LowCodeLangClient } from "@drifftr/ballerina-low-code-editor";
+import { DocumentSymbol, DocumentSymbolParams, SymbolInformation } from "monaco-languageclient";
 import {
-    DidOpenParams, DidCloseParams, DidChangeParams, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse,
-    BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse,
-    TriggerModifyRequest, GetSyntaxTreeParams, GetSyntaxTreeResponse, CompletionParams, CompletionResponse,
-} from "@drifftr/ballerina-low-code-editor/build/Definitions";
+    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse, DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest
+} from "@wso2-enterprise/low-code-editor/build/Definitions";
 
 export const BALLERINA_LANG_ID = "ballerina";
 
@@ -117,7 +115,7 @@ export interface GetSynRequest {
     Params: string;
 }
 
-export interface LowCodeLangClient1 extends Omit<LowCodeLangClient, 'diagnostics'> {
+export interface LowCodeLangClient1 extends Omit<DiagramEditorLangClientInterface, 'init'> {
     // Diagnostics: (params: BallerinaProjectParams) => Thenable<PublishDiagnosticsParams[]>;
 }
 
@@ -126,6 +124,13 @@ export class ExtendedLangClient extends LanguageClient implements LowCodeLangCli
     //     return this.sendRequest<PublishDiagnosticsParams[]>("ballerinaDocument/diagnostics", params);
     // }
     isInitialized: boolean = true;
+
+    // // init (params: InitializeParams): Promise<InitializeResult> {
+    // //     return {
+    // //         capabilities: ServerCapabilities = getServerOptions
+    // //         custom = []
+    // //     };
+    // // }
 
     didOpen(params: DidOpenParams): void {
         this.sendRequest("textDocument/didOpen", params);
@@ -166,15 +171,16 @@ export class ExtendedLangClient extends LanguageClient implements LowCodeLangCli
         return this.sendRequest<BallerinaSTModifyResponse>("ballerinaDocument/triggerModify", params);
     }
 
-    getCompletion(params: CompletionParams): Thenable<CompletionResponse[]> {
-        return this.sendRequest("textDocument/completion", params);
-    }
+    // getCompletion(params: CompletionParams): Thenable<CompletionResponse[]> {
+    //     return this.sendRequest("textDocument/completion", params);
+    // }
 
     public getDocumentSymbol(params: DocumentSymbolParams): Thenable<DocumentSymbol[] | SymbolInformation[] | null> {
         return this.sendRequest("textDocument/documentSymbol", params);
     }
 
     public close(): void {
+        console.log("close");
         // this.shutdown();
     }
     getDidOpenParams(): DidOpenParams {

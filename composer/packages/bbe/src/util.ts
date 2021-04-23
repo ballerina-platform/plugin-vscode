@@ -1,3 +1,4 @@
+import { DiagramEditorLangClientInterface } from "@wso2-enterprise/low-code-editor";
 import { createElement } from "react";
 import { render } from "react-dom";
 import { Diagram } from "./Diagram";
@@ -22,7 +23,7 @@ export function renderDiagramEditor(options: {
     target: HTMLElement, editorProps: {
         docUri: string, width: string,
         height: string, zoom: string,
-        langClient: any
+        langClient: DiagramEditorLangClientInterface
     }
 }) {
     // const props = {

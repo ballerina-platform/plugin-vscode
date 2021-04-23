@@ -15,14 +15,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+// tslint:disable-next-line:ordered-imports
+import { DiagramEditorLangClientInterface } from "@wso2-enterprise/low-code-editor";
+// tslint:disable-next-line:no-submodule-imports
+import { DiagramGenerator } from "@wso2-enterprise/low-code-editor/build/DiagramGenerator/index";
 import * as React from "react";
 import { Input } from "semantic-ui-react";
 import { BallerinaExampleCategory } from "./model";
-// tslint:disable-next-line:ordered-imports
-import DiagramGenerator from "@drifftr/ballerina-low-code-editor";
 
 // export interface SamplesListState {
-//     samples?: BallerinaExampleCategory[];
+//     samples?: BallerinaExampleCategory[];/
 //     searchQuery?: string;
 // }
 
@@ -31,7 +33,7 @@ export interface DiagramProps {
     editorProps: {
         docUri: string, width: string,
         height: string, zoom: string,
-        langClient: any
+        langClient: DiagramEditorLangClientInterface
     };
 }
 
@@ -45,7 +47,7 @@ export class Diagram extends React.Component<DiagramProps> {
 
     // private availableSamples: undefined | BallerinaExampleCategory[];
     private searchInput: Input | undefined;
-    private languageClient: any;
+    private languageClient: DiagramEditorLangClientInterface;
     private filePath: string;
 
     constructor(props: DiagramProps) {
@@ -93,6 +95,6 @@ export class Diagram extends React.Component<DiagramProps> {
     }
 
     public render() {
-        return (<DiagramGenerator langClient={this.languageClient} filePath={this.filePath} />);
+        return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath} />);
     }
 }
