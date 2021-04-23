@@ -277,7 +277,7 @@
     },
     "dependencies": {
         "@types/js-base64": "^2.3.1",
-        "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-23/4/wso2-enterprise-low-code-editor-1.0.2.tgz",
+        "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-23/8/wso2-enterprise-low-code-editor-1.0.2.tgz",
         "cross-env": "^5.2.0",
         "dom-parser": "^0.1.6",
         "glob": "^7.1.3",

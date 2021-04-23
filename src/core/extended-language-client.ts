@@ -22,7 +22,7 @@ import { LanguageClient, TextDocumentPositionParams } from "vscode-languageclien
 import { Uri, Location } from "vscode";
 import { DocumentSymbol, DocumentSymbolParams, SymbolInformation } from "monaco-languageclient";
 import {
-    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse, DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest
+    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse, DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest, GetSyntaxTreeFileRangeParams, GetSyntaxTreeFileRangeResponse
 } from "@wso2-enterprise/low-code-editor/build/Definitions";
 
 export const BALLERINA_LANG_ID = "ballerina";
@@ -195,6 +195,10 @@ export class ExtendedLangClient extends LanguageClient implements LowCodeLangCli
                 version: 1
             }
         };
+    }
+
+    public getSyntaxTreeFileRange(params: GetSyntaxTreeFileRangeParams): Thenable<GetSyntaxTreeFileRangeResponse> {
+        return this.sendRequest("ballerinaDocument/syntaxTreeByRange", params);
     }
 
     getSyntaxHighlighter(params: string): Thenable<BallerinaSynResponse> {

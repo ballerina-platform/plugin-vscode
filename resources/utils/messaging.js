@@ -70,7 +70,7 @@ function getLangClient() {
         },
         getSyntaxTree: (params) => {
             return new Promise((resolve, reject) => {
-                webViewRPCHandler.invokeRemoteMethod('SyntaxTree', [params.documentIdentifier.uri], (resp) => {
+                webViewRPCHandler.invokeRemoteMethod('getSyntaxTree', [params.documentIdentifier.uri], (resp) => {
                     resolve(resp);
                 });
             });
@@ -214,6 +214,13 @@ function getLangClient() {
         getDidOpenParams: () => {
             return new Promise((resolve, reject) => {
                 webViewRPCHandler.invokeRemoteMethod('getDidOpenParams', [], (resp) => {
+                    resolve(resp);
+                });
+            })
+        },
+        getSyntaxTreeFileRange: (params) => {
+            return new Promise((resolve, reject) => {
+                webViewRPCHandler.invokeRemoteMethod('getSyntaxTreeFileRange', [params], (resp) => {
                     resolve(resp);
                 });
             })
