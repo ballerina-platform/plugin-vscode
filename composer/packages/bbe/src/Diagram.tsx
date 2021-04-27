@@ -24,7 +24,7 @@ import { Input } from "semantic-ui-react";
 import { BallerinaExampleCategory } from "./model";
 
 // export interface SamplesListState {
-//     samples?: BallerinaExampleCategory[];/
+//     samples?: BallerinaExampleCategory[];
 //     searchQuery?: string;
 // }
 

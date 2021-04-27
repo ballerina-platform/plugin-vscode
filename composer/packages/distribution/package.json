@@ -21,6 +21,7 @@
     "@ballerina/theme": "^2.0.0-alpha3-SNAPSHOT"
   },
   "devDependencies": {
-    "@ballerina/composer-cli": "^2.0.0-alpha3-SNAPSHOT"
+    "@ballerina/composer-cli": "^2.0.0-alpha3-SNAPSHOT",
+    "svg-url-loader": "^6.0.0"
   }
 }

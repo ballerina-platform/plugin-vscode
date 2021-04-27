@@ -123,8 +123,8 @@ export function getComposerJSFiles(isAPIEditor: boolean = false): string[] {
 
 export function getComposerCSSFiles(): string[] {
     return [
-        join(getComposerPath(), 'themes', 'ballerina-default.min.css'),
-        join(getComposerURI(), 'font', 'font-ballerina.css')
+        // join(getComposerPath(), 'themes', 'test.scss'),
+        // join(getComposerURI(), 'font', 'font-ballerina.css')
     ];
 }
 
