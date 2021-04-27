@@ -1,12 +1,13 @@
 import { Uri } from 'vscode';
-import { getLibraryWebViewContent, WebViewOptions, getComposerWebViewOptions } from '../utils';
+import { getLibraryWebViewContent, WebViewOptions, getComposerWebViewOptions, log } from '../utils';
+import fileUriToPath = require('file-uri-to-path');
 
-export function render (filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number)
-        : string {       
-   return renderDiagram(filePath, startLine, startColumn, endLine, endColumn);
+export function render(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number)
+    : string {
+    return renderDiagram(filePath, startLine, startColumn, endLine, endColumn);
 }
 
-function renderDiagram(filePath: Uri,  startLine: number, startColumn: number, endLine: number, endColumn: number): string {
+function renderDiagram(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number): string {
 
     const body = `
         <div id="warning"></div>
@@ -54,10 +55,13 @@ function renderDiagram(filePath: Uri,  startLine: number, startColumn: number, e
         }
     `;
 
+    const filePathString = fileUriToPath(filePath.toString());
+    log(filePath.toString());
+    log(filePathString);
     const scripts = `
         function loadedScript() {
             window.langclient = getLangClient();
-            let filePath = ${JSON.stringify(filePath.toString())};
+            let filePath = ${JSON.stringify(filePathString.toString())};
             let startLine = ${JSON.stringify(startLine.toString())};
             let startColumn = ${JSON.stringify(startColumn.toString())};
             let endLine = ${JSON.stringify(endLine.toString())};
@@ -99,12 +103,12 @@ function renderDiagram(filePath: Uri,  startLine: number, startColumn: number, e
             enableUndoRedo();
         }
     `;
-    
+
     const webViewOptions: WebViewOptions = {
         ...getComposerWebViewOptions(),
         body, scripts, styles, bodyCss
     };
-    
+
     return getLibraryWebViewContent(webViewOptions);
 }
 

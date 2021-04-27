@@ -18,6 +18,82 @@ const getLangClientMethods = (langClient: ExtendedLangClient): WebViewMethod[] =
                 return langClient.fetchExamples();
             });
         }
+    },
+    {
+        methodName: 'didOpen',
+        handler: (args: any[]) => {
+            return langClient.didOpen(args[0]);
+        }
+    }, {
+        methodName: 'registerPublishDiagnostics',
+        handler: () => {
+            return langClient.registerPublishDiagnostics();
+        }
+    }, {
+        methodName: 'didClose',
+        handler: (args: any[]) => {
+            return langClient.didClose(args[0]);
+        }
+    }, {
+        methodName: 'didChange',
+        handler: (args: any[]) => {
+            return langClient.didChange(args[0]);
+        }
+    }, {
+        methodName: 'syntaxTreeModify',
+        handler: (args: any[]) => {
+            return langClient.syntaxTreeModify(args[0]);
+        }
+    }, {
+        methodName: 'getConnectors',
+        handler: () => {
+            return langClient.getConnectors();
+        }
+    }, {
+        methodName: 'getConnector',
+        handler: (args: any[]) => {
+            return langClient.getConnector(args[0]);
+        }
+    }, {
+        methodName: 'getRecord',
+        handler: (args: any[]) => {
+            return langClient.getRecord(args[0]);
+        }
+    }, {
+        methodName: 'astModify',
+        handler: (args: any[]) => {
+            return langClient.astModify(args[0]);
+        }
+    }, {
+        methodName: 'stModify',
+        handler: (args: any[]) => {
+            return langClient.stModify(args[0]);
+        }
+    }, {
+        methodName: 'triggerModify',
+        handler: (args: any[]) => {
+            return langClient.triggerModify(args[0]);
+        }
+    }, {
+        methodName: 'getDocumentSymbol',
+        handler: (args: any[]) => {
+            return langClient.getDocumentSymbol(args[0]);
+        }
+    }, {
+        methodName: 'close',
+        handler: () => {
+            return langClient.close();
+        }
+    }, {
+        methodName: 'getDidOpenParams',
+        handler: () => {
+            return langClient.getDidOpenParams();
+        }
+    }, {
+        methodName: 'getSyntaxTreeFileRange',
+        handler: (args: any[]) => {
+            return langClient.getSyntaxTreeFileRange(args[0]);
+        }
     }
     ];
 };

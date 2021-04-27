@@ -15,12 +15,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+// tslint:disable-next-line:no-submodule-imports
+import { DiagramEditorLangClientInterface } from "@wso2-enterprise/low-code-editor";
+// tslint:disable-next-line:no-submodule-imports
+import { DiagramGenerator } from "@wso2-enterprise/low-code-editor/build/DiagramGenerator/index";
 import * as React from "react";
 
 export interface DiagramProps {
     target: HTMLElement;
     editorProps: {
-        langClient: any,
+        langClient: DiagramEditorLangClientInterface,
         filePath: string,
         startLine: number,
         startColumn: number,
@@ -34,38 +38,42 @@ export interface DiagramProps {
  */
 export class Diagram extends React.Component<DiagramProps> {
 
-    private languageClient: any;
+    private languageClient: DiagramEditorLangClientInterface;
     private filePath: string;
-    private startLine: number;
-    private startColumn: number;
-    private endLine: number;
-    private endColumn: number;
+    // private startLine: number;
+    // private startColumn: number;
+    // private endLine: number;
+    // private endColumn: number;
 
     constructor(props: DiagramProps) {
         super(props);
         this.filePath = props.editorProps.filePath;
-        this.startLine = props.editorProps.startLine;
-        this.startColumn = props.editorProps.startColumn;
-        this.endLine = props.editorProps.endLine;
-        this.endColumn = props.editorProps.endColumn;
+        // this.startLine = props.editorProps.startLine;
+        // this.startColumn = props.editorProps.startColumn;
+        // this.endLine = props.editorProps.endLine;
+        // this.endColumn = props.editorProps.endColumn;
+        this.languageClient = props.editorProps.langClient;
     }
 
     public render() {
-        // return (<DiagramGenerator langClient={this.languageClient} syntaxTree={this.languageClient} />);
-        return (<div>
-            <h1>Hello Diagram</h1>
-            <h2>languageClient: </h2>
-            <p>{this.languageClient}</p>
-            <h2>filePath: </h2>
-            <p>{this.filePath}</p>
-            <h2>startLine: </h2>
-            <p>{this.startLine}</p>
-            <h2>startColumn: </h2>
-            <p>{this.startColumn}</p>
-            <h2>endLine: </h2>
-            <p>{this.endLine}</p>
-            <h2>endColumn: </h2>
-            <p>{this.endColumn}</p>
-        </div>);
+        // return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath}
+        //     startLine={this.startLine.toString()} startCharacter={this.startColumn.toString()}
+        //     endLine={this.endLine.toString()} endCharacter={this.endColumn.toString()} />);
+        return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath} />);
+        /// return (<div>
+        //     <h1>Hello Diagram</h1>
+        //     <h2>languageClient: </h2>
+        //     <p>{this.languageClient}</p>
+        //     <h2>filePath: </h2>
+        //     <p>{this.filePath}</p>
+        //     <h2>startLine: </h2>
+        //     <p>{this.startLine}</p>
+        //     <h2>startColumn: </h2>
+        //     <p>{this.startColumn}</p>
+        //     <h2>endLine: </h2>
+        //     <p>{this.endLine}</p>
+        //     <h2>endColumn: </h2>
+        //     <p>{this.endColumn}</p>
+        // </div>);
     }
 }

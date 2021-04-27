@@ -18,13 +18,11 @@
  *
  */
 
-import { DocumentSymbol, DocumentSymbolParams, LanguageClient, SymbolInformation } from "vscode-languageclient";
-import { LowCodeLangClient } from "@drifftr/ballerina-low-code-editor";
+import { LanguageClient } from "vscode-languageclient";
+import { DocumentSymbol, DocumentSymbolParams, SymbolInformation } from "monaco-languageclient";
 import {
-    DidOpenParams, DidCloseParams, DidChangeParams, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse,
-    BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse,
-    TriggerModifyRequest, GetSyntaxTreeParams, GetSyntaxTreeResponse, CompletionParams, CompletionResponse,
-} from "@drifftr/ballerina-low-code-editor/build/Definitions";
+    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse, DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest, GetSyntaxTreeFileRangeParams, GetSyntaxTreeFileRangeResponse
+} from "@wso2-enterprise/low-code-editor/build/Definitions";
 
 export const BALLERINA_LANG_ID = "ballerina";
 
@@ -124,12 +122,11 @@ export interface GetSynRequest {
     Params: string;
 }
 
-export interface LowCodeLangClientTemp extends Omit<LowCodeLangClient, 'diagnostics'> {
+export interface LowCodeLangClientTemp extends Omit<DiagramEditorLangClientInterface, 'init'> {
     // Diagnostics: (params: BallerinaProjectParams) => Thenable<PublishDiagnosticsParams[]>;
 }
 
 export class ExtendedLangClient extends LanguageClient implements LowCodeLangClientTemp {
-
     isInitialized: boolean = true;
 
     didOpen(params: DidOpenParams): void {
@@ -171,9 +168,9 @@ export class ExtendedLangClient extends LanguageClient implements LowCodeLangCli
         return this.sendRequest<BallerinaSTModifyResponse>("ballerinaDocument/triggerModify", params);
     }
 
-    getCompletion(params: CompletionParams): Thenable<CompletionResponse[]> {
-        return this.sendRequest("textDocument/completion", params);
-    }
+    // getCompletion(params: CompletionParams): Thenable<CompletionResponse[]> {
+    //     return this.sendRequest("textDocument/completion", params);
+    // }
 
     public getDocumentSymbol(params: DocumentSymbolParams): Thenable<DocumentSymbol[] | SymbolInformation[] | null> {
         return this.sendRequest("textDocument/documentSymbol", params);
@@ -195,6 +192,12 @@ export class ExtendedLangClient extends LanguageClient implements LowCodeLangCli
             }
         };
     }
+
+    getSyntaxTreeFileRange(params: GetSyntaxTreeFileRangeParams): Thenable<GetSyntaxTreeFileRangeResponse> {
+        return this.sendRequest("ballerinaDocument/syntaxTreeByRange", params);
+    }
+
+    // getSyntaxTreeFileRange: (params: GetSyntaxTreeFileRangeParams) => Thenable<GetSyntaxTreeFileRangeResponse>;
 
     getSyntaxHighlighter(params: string): Thenable<BallerinaSynResponse> {
         const req: GetSynRequest = {

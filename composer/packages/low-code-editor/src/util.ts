@@ -15,13 +15,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+import { DiagramEditorLangClientInterface } from "@wso2-enterprise/low-code-editor";
 import { createElement } from "react";
 import { render } from "react-dom";
 import { Diagram } from "./Diagram";
 
 export function renderDiagramEditor(options: {
     target: HTMLElement, editorProps: {
-        langClient: any,
+        langClient: DiagramEditorLangClientInterface,
         filePath: string,
         startLine: number,
         startColumn: number,
