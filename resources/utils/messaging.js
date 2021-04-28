@@ -217,6 +217,13 @@ function getLangClient() {
                     resolve(resp);
                 });
             })
+        },
+        getSyntaxTreeFileRange: (params) => {
+            return new Promise((resolve, reject) => {
+                webViewRPCHandler.invokeRemoteMethod('getSyntaxTreeFileRange', [params], (resp) => {
+                    resolve(resp);
+                });
+            })
         }
     }
 }

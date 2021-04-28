@@ -31,7 +31,8 @@ module.exports = {
                 test: /\.css|\.scss$/,
                 use: [
                     'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {
@@ -40,7 +41,6 @@ module.exports = {
                     {
                         loader: 'svg-url-loader',
                         options: {
-                            limit: 10000,
                         },
                     },
                 ],

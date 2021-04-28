@@ -1,6 +1,6 @@
 import { Uri } from 'vscode';
 import { getLibraryWebViewContent, WebViewOptions, getComposerWebViewOptions, log } from '../utils';
-import fileUriToPath = require('file-uri-to-path');
+// import fileUriToPath = require('file-uri-to-path');
 
 export function render(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number)
     : string {
@@ -55,13 +55,13 @@ function renderDiagram(filePath: Uri, startLine: number, startColumn: number, en
         }
     `;
 
-    const filePathString = fileUriToPath(filePath.toString());
-    log(filePath.toString());
-    log(filePathString);
+    // const filePathString = fileUriToPath(filePath.toString());
+    log(filePath.fsPath);
+    // log(filePathString);
     const scripts = `
         function loadedScript() {
             window.langclient = getLangClient();
-            let filePath = ${JSON.stringify(filePathString.toString())};
+            let filePath = ${JSON.stringify(filePath.fsPath)};
             let startLine = ${JSON.stringify(startLine.toString())};
             let startColumn = ${JSON.stringify(startColumn.toString())};
             let endLine = ${JSON.stringify(endLine.toString())};

@@ -21,7 +21,11 @@
 import { LanguageClient } from "vscode-languageclient";
 import { DocumentSymbol, DocumentSymbolParams, SymbolInformation } from "monaco-languageclient";
 import {
-    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse, DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse, BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest, BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest, GetSyntaxTreeFileRangeParams, GetSyntaxTreeFileRangeResponse
+    DidOpenParams, DidCloseParams, DidChangeParams, GetSyntaxTreeParams, GetSyntaxTreeResponse,
+    DiagramEditorLangClientInterface, BallerinaSyntaxTreeModifyRequest, BallerinaSyntaxTreeResponse,
+    BallerinaConnectorsResponse, BallerinaConnectorRequest, BallerinaConnectorResponse, BallerinaRecordRequest,
+    BallerinaRecordResponse, BallerinaSTModifyRequest, BallerinaSTModifyResponse, TriggerModifyRequest,
+    GetSyntaxTreeFileRangeParams, GetSyntaxTreeFileRangeResponse
 } from "@wso2-enterprise/low-code-editor/build/Definitions";
 
 export const BALLERINA_LANG_ID = "ballerina";

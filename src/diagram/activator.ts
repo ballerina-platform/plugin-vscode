@@ -21,7 +21,7 @@ import * as _ from 'lodash';
 import { render } from './renderer';
 import { ExtendedLangClient } from '../core/extended-language-client';
 import { BallerinaExtension } from '../core';
-import { getCommonWebViewOptions } from '../utils';
+import { getCommonWebViewOptions, WebViewRPCHandler } from '../utils';
 import { join } from "path";
 import {
 	TM_EVENT_OPEN_DIAGRAM, TM_EVENT_ERROR_OLD_BAL_HOME_DETECTED, TM_EVENT_ERROR_EXECUTE_DIAGRAM_OPEN, CMP_DIAGRAM_VIEW,
@@ -87,7 +87,7 @@ export function showDiagramEditor(context: ExtensionContext, ballerinaExtInstanc
 	// 	return;
 	// }
 	// activeEditor = editor;
-	// WebViewRPCHandler.create(diagramViewPanel, langClient);
+	WebViewRPCHandler.create(diagramViewPanel, ballerinaExtInstance.langClient!);
 	let treeItemPath: Uri;
 	if (filePath === '') {
 		if (!editor || !window.activeTextEditor || !window.activeTextEditor.document.fileName.endsWith('.bal')) {
