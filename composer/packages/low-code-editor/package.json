@@ -19,7 +19,7 @@
     "@ballerina/composer-cli": "^2.0.0-beta1-SNAPSHOT"
   },
   "dependencies": {
-    "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-23/8/wso2-enterprise-low-code-editor-1.0.2.tgz"
+    "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-27/wso2-enterprise-low-code-editor-1.0.2.tgz"
   },
   "author": "ballerina.io",
   "license": "Apache-2.0"

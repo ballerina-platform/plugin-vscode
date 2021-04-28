@@ -57,7 +57,10 @@ function renderDiagram(filePath: Uri, startLine: number, startColumn: number, en
 
     // const filePathString = fileUriToPath(filePath.toString());
     log(filePath.fsPath);
-    // log(filePathString);
+    log('start: ' + startLine);
+    log('startColumn: ' + startColumn);
+    log('end: ' + endLine);
+    log('endColumn: ' + endColumn);
     const scripts = `
         function loadedScript() {
             window.langclient = getLangClient();

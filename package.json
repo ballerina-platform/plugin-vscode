@@ -302,7 +302,7 @@
         "lint": "tslint --fix 'src/**/*{.ts,.tsx}'"
     },
     "dependencies": {
-        "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-23/8/wso2-enterprise-low-code-editor-1.0.2.tgz",
+        "@wso2-enterprise/low-code-editor": "file:/Users/prabushi/Desktop/test-04-27/wso2-enterprise-low-code-editor-1.0.2.tgz",
         "@types/js-base64": "^2.3.1",
         "cross-env": "^5.2.0",
         "dom-parser": "^0.1.6",

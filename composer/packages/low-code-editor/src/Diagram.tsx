@@ -40,26 +40,26 @@ export class Diagram extends React.Component<DiagramProps> {
 
     private languageClient: DiagramEditorLangClientInterface;
     private filePath: string;
-    // private startLine: number;
-    // private startColumn: number;
-    // private endLine: number;
-    // private endColumn: number;
+    private startLine: number;
+    private startColumn: number;
+    private endLine: number;
+    private endColumn: number;
 
     constructor(props: DiagramProps) {
         super(props);
         this.filePath = props.editorProps.filePath;
-        // this.startLine = props.editorProps.startLine;
-        // this.startColumn = props.editorProps.startColumn;
-        // this.endLine = props.editorProps.endLine;
-        // this.endColumn = props.editorProps.endColumn;
+        this.startLine = props.editorProps.startLine;
+        this.startColumn = props.editorProps.startColumn;
+        this.endLine = props.editorProps.endLine;
+        this.endColumn = props.editorProps.endColumn;
         this.languageClient = props.editorProps.langClient;
     }
 
     public render() {
-        // return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath}
-        //     startLine={this.startLine.toString()} startCharacter={this.startColumn.toString()}
-        //     endLine={this.endLine.toString()} endCharacter={this.endColumn.toString()} />);
-        return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath} />);
+        return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath}
+            startLine={this.startLine.toString()} startCharacter={this.startColumn.toString()}
+            endLine={this.endLine.toString()} endCharacter={this.endColumn.toString()} />);
+        // return (<DiagramGenerator diagramLangClient={this.languageClient} filePath={this.filePath} />);
         /// return (<div>
         //     <h1>Hello Diagram</h1>
         //     <h2>languageClient: </h2>
