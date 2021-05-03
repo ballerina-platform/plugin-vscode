@@ -42,14 +42,15 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
     });
 
     commands.registerCommand(TREE_ELEMENT_EXECUTE_COMMAND, (filePath: string, kind: string, startLine: number,
-        startColumn: number, endLine: number, endColumn: number) => {
+        startColumn: number, endLine: number, endColumn: number, name: string) => {
         ballerinaExtInstance.packageTreeElementClicked({
             filePath,
             kind,
             startLine,
             startColumn,
             endLine,
-            endColumn
+            endColumn,
+            name
         });
     });
 
@@ -57,7 +58,7 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
         // openBallerinaFile(construct);
         if (construct.kind === PROJECT_KIND.FUNCTION || construct.kind === PROJECT_KIND.RESOURCE) {
             showDiagramEditor(ballerinaExtInstance.context!, ballerinaExtInstance, construct.startLine,
-                construct.startColumn, construct.endLine, construct.endColumn, construct.filePath);
+                construct.startColumn, construct.endLine, construct.endColumn, construct.kind, construct.name, construct.filePath);
         }
     });
 }

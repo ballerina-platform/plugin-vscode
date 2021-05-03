@@ -42,7 +42,7 @@ let diagramViewPanel: WebviewPanel | undefined;
 // }
 
 export function showDiagramEditor(context: ExtensionContext, ballerinaExtInstance: BallerinaExtension, startLine: number,
-	startColumn: number, endLine: number, endColumn: number, filePath: string = ''): void {
+	startColumn: number, endLine: number, endColumn: number, kind: string, name: string, filePath: string = ''): void {
 	// const didChangeDisposable = workspace.onDidChangeTextDocument(
 	// 	_.debounce((e: TextDocumentChangeEvent) => {
 	// 		if (activeEditor && (e.document === activeEditor.document) &&
@@ -104,7 +104,7 @@ export function showDiagramEditor(context: ExtensionContext, ballerinaExtInstanc
 		treeItemPath = Uri.file(filePath);
 	}
 
-	const html = render(treeItemPath!, startLine, startColumn, endLine, endColumn);
+	const html = render(treeItemPath!, startLine, startColumn, endLine, endColumn, kind, name);
 	if (diagramViewPanel && html) {
 		diagramViewPanel.webview.html = html;
 	}
@@ -137,7 +137,7 @@ export function activate(ballerinaExtInstance: BallerinaExtension) {
 					ballerinaExtInstance.showMessageServerMissingCapability();
 					return {};
 				}
-				showDiagramEditor(context, ballerinaExtInstance, 0, 0, -1, -1);
+				showDiagramEditor(context, ballerinaExtInstance, 0, 0, -1, -1, '', '');
 			})
 			.catch((e) => {
 				ballerinaExtInstance.showPluginActivationError();

@@ -55,6 +55,7 @@ export interface ConstructIdentifier {
     startColumn: number;
     endLine: number;
     endColumn: number;
+    name: string;
 }
 
 export class BallerinaExtension {

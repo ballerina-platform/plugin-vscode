@@ -17,16 +17,16 @@
  *
  */
 
-@type    : "view";
+@type : "view";
 @element : "diagram";
 
 @import (multiple) '../../ballerina.config';
 
 .diagram(@color) {
-    background: ~"@{@{color}-diagram-background-color}";
+    background:~"@{@{color}-diagram-background-color}";
     display: inline-block;
     min-width: 100%;
-    
+
     .status-wrapper {
         width: auto;
         right: 70px;
@@ -40,25 +40,28 @@
         z-index: 0;
         border-width: 1px 0 1px 1px;
         border-style: solid;
-        border-color: #e9e9e9; 
-        background: ~"@{@{color}-diagram-background-color}";
+        border-color: #e9e9e9;
+        background:~"@{@{color}-diagram-background-color}";
         cursor: pointer;
 
         .label {
-            background: ~"@{@{color}-diagram-background-color}";
+            background:~"@{@{color}-diagram-background-color}";
             padding: 10px 5px 10px 0;
             font-size: 14px;
             font-weight: 300;
             cursor: pointer;
         }
+
         p {
-            margin: 0; 
+            margin: 0;
             line-height: 0;
         }
+
         &:hover {
             cursor: pointer;
         }
     }
+
     .menu-icon {
         font-size: 20px;
         color: #f1f1f1;
@@ -92,15 +95,15 @@
         &.menu-container {
             width: 410px;
             height: auto;
-            box-shadow: 3px 3px 0px 0px rgba(238,238,238,0.75);
-            -webkit-box-shadow: 3px 3px 0px 0px rgba(238,238,238,0.75);
-            -moz-box-shadow: 3px 3px 0px 0px rgba(238,238,238,0.75);
+            box-shadow: 3px 3px 0px 0px rgba(238, 238, 238, 0.75);
+            -webkit-box-shadow: 3px 3px 0px 0px rgba(238, 238, 238, 0.75);
+            -moz-box-shadow: 3px 3px 0px 0px rgba(238, 238, 238, 0.75);
             border: 1px solid #ccc;
             margin-right: 2px;
             position: fixed;
             right: 2em;
             top: 1.4em;
-            background: ~"@{@{color}-diagram-background-color}";
+            background:~"@{@{color}-diagram-background-color}";
             z-index: 1000;
             padding-top: 0;
             margin-top: 0;
@@ -117,26 +120,29 @@
                 }
 
                 .selection-row {
-                    background: ~"@{@{color}-diagram-menu-row-background}";
+                    background:~"@{@{color}-diagram-menu-row-background}";
                     padding: 7px 0;
                     height: 30px;
                     display: inline-flex;
 
                     .menu-dropdown-small {
-                        background: ~"@{@{color}-diagram-menu-dropdown-background}";
+                        background:~"@{@{color}-diagram-menu-dropdown-background}";
                         width: 100px;
                         height: auto;
                         padding: 10px;
                         height: 30px;
                         margin-top: -7px;
-                        .text { 
+
+                        .text {
                             width: 100px;
                         }
+
                         .icon {
                             width: 10px;
                             padding: 0;
                             font-size: 10px;
                         }
+
                         &.label {
                             font-weight: 500;
                             color: #333;
@@ -144,6 +150,7 @@
                             height: 30px;
                             top: -4px;
                         }
+
                         &.dropdown {
                             height: 30px;
                             padding-top: 7px;
@@ -154,10 +161,11 @@
                             }
                         }
                     }
+
                     .icon {
                         font-size: 12px;
                         width: 30px;
-                        margin-left: 5px; 
+                        margin-left: 5px;
                         cursor: pointer;
                         padding-bottom: 10px;
                         display: inline-flex;
@@ -167,42 +175,48 @@
                             color: #868686;
                         }
                     }
+
                     .menu-dropdown-mid {
-                        background: ~"@{@{color}-diagram-menu-dropdown-background}";
+                        background:~"@{@{color}-diagram-menu-dropdown-background}";
                         width: 222px;
                         height: auto;
                         padding: 10px;
                         height: 30px;
                         margin-top: -7px;
+
                         .item {
                             width: 220px;
                         }
-                        .text { 
+
+                        .text {
                             width: 180px;
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap;
                             margin-top: -5px;
                         }
+
                         .icon {
-                            padding:0;
+                            padding: 0;
                             width: 10px;
                             font-size: 10px;
                             top: -4px;
                         }
                     }
+
                     .ui.dropdown .menu {
                         box-shadow: none;
-                        width:148px
+                        width: 148px
                     }
                 }
+
                 .menu-control {
                     padding: 0;
-                    
+
                     .icon {
                         font-size: 12px;
                         width: 30px;
-                        margin-top: 8px; 
+                        margin-top: 8px;
 
                         &:hover {
                             cursor: pointer;
@@ -212,25 +226,34 @@
             }
         }
     }
-    
+
     .diagram-container {
-        background: ~"@{@{color}-diagram-background-color}";
+        background:~"@{@{color}-diagram-background-color}";
         height: 110vh;
 
         text {
-            fill: ~"@{@{color}-diagram-base-text-color}";
+            fill:~"@{@{color}-diagram-base-text-color}";
             dominant-baseline: central;
             cursor: default;
+
             &.editable {
                 cursor: text;
             }
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently supported by Chrome and Opera */
         }
+
         .diagram-canvas {
             font-family: @diagram-font;
             font-size: @diagram-font-size;
@@ -239,206 +262,245 @@
             outline: none;
 
             .panel-group-header {
-                fill: ~"@{@{color}-diagram-panel-header-background-color}";
+                fill:~"@{@{color}-diagram-panel-header-background-color}";
 
                 .panel-icon {
                     font-family: @iconFont;
                 }
+
                 text {
-                    fill: ~"@{@{color}-diagram-panel-header-text-color}";
+                    fill:~"@{@{color}-diagram-panel-header-text-color}";
                     font-size: 18px;
                 }
             }
-            
+
             .panel {
-                .match{
-                    line{
-                        stroke: ~"@{@{color}-diagram-expanded-func-frame-color}";
+                .match {
+                    line {
+                        stroke:~"@{@{color}-diagram-expanded-func-frame-color}";
                         stroke-width: 1px;
                     }
+
                     text {
-                        fill: ~"@{@{color}-diagram-panel-header-text-color}";
+                        fill:~"@{@{color}-diagram-panel-header-text-color}";
                     }
-                    polygon{
-                        stroke: ~"@{@{color}-diagram-expanded-func-frame-color}";
+
+                    polygon {
+                        stroke:~"@{@{color}-diagram-expanded-func-frame-color}";
                         stroke-width: 1px;
                     }
                 }
+
                 .frame-border {
                     fill: none;
                     stroke-width: 1px;
-                    stroke: ~"@{@{color}-diagram-expanded-func-frame-color}";
+                    stroke:~"@{@{color}-diagram-expanded-func-frame-color}";
                 }
+
                 .statement {
                     pointer-events: all;
                 }
+
                 .hidden-block {
                     stroke: gray;
                     stroke-width: 1px;
                     fill: aliceblue;
                     cursor: pointer;
                 }
+
                 .panel-header {
-                    fill: ~"@{@{color}-diagram-panel-header-background-color}";
+                    fill:~"@{@{color}-diagram-panel-header-background-color}";
 
                     .panel-icon {
                         font-family: @iconFont;
                     }
+
                     text {
-                        fill: ~"@{@{color}-diagram-panel-header-text-color}";
+                        fill:~"@{@{color}-diagram-panel-header-text-color}";
                         font-size: @diagram-life-line-head-font-size;
                     }
                 }
+
                 .panel-body {
-                    fill: ~"@{@{color}-diagram-panel-body-background-color}";
+                    fill:~"@{@{color}-diagram-panel-body-background-color}";
 
                     .client-line {
-                        stroke: ~"@{@{color}-diagram-client-line-stroke-color}";
+                        stroke:~"@{@{color}-diagram-client-line-stroke-color}";
                         stroke-width: @diagram-client-line-stroke-width;
                     }
-                    
+
                     .life-line {
-                        stroke: ~"@{@{color}-diagram-life-line-stroke-color}";
+                        stroke:~"@{@{color}-diagram-life-line-stroke-color}";
                         stroke-width: @diagram-life-line-stroke-width;
 
                         rect {
-                            fill: ~"@{@{color}-diagram-life-line-head-background-color}";
-                            stroke: ~"@{@{color}-diagram-life-line-head-stroke-color}";
-                            stroke-width: 0; 
+                            fill:~"@{@{color}-diagram-life-line-head-background-color}";
+                            stroke:~"@{@{color}-diagram-life-line-head-stroke-color}";
+                            stroke-width: 0;
                         }
+
                         text {
-                            fill: ~"@{@{color}-diagram-life-line-text-color}";
+                            fill:~"@{@{color}-diagram-life-line-text-color}";
                             stroke-width: 0;
                             text-anchor: middle;
                         }
 
                         &.life-line-worker {
-                            stroke:  ~"@{@{color}-diagram-life-line-worker-stroke-color}";
-                            color: ~"@{@{color}-diagram-life-line-worker-stroke-color}";
+                            stroke:~"@{@{color}-diagram-life-line-worker-stroke-color}";
+                            color:~"@{@{color}-diagram-life-line-worker-stroke-color}";
 
                             rect {
-                                fill: ~"@{@{color}-diagram-life-line-worker-stroke-color}";
+                                fill:~"@{@{color}-diagram-life-line-worker-stroke-color}";
                             }
+
                             text {
-                                fill: ~"@{@{color}-diagram-life-line-worker-stroke-color}";
+                                fill:~"@{@{color}-diagram-life-line-worker-stroke-color}";
                             }
                         }
+
                         &.life-line-endpoint {
-                            stroke: ~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
-                            color: ~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
+                            stroke:~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
+                            color:~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
 
                             rect {
-                                fill: ~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
+                                fill:~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
                             }
+
                             text {
-                                fill: ~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
+                                fill:~"@{@{color}-diagram-life-line-endpoint-stroke-color}";
                             }
                         }
                     }
+
                     .life-line-endpoint-activity {
-                        fill: ~"@{@{color}-diagram-life-line-endpoint-stroke-activity-color}";
+                        fill:~"@{@{color}-diagram-life-line-endpoint-stroke-activity-color}";
                     }
+
                     .arrow-head {
-                        fill: ~"@{@{color}-diagram-arrow-head-color}";
+                        fill:~"@{@{color}-diagram-arrow-head-color}";
                     }
+
                     .statement {
                         font-size: @diagram-statement-font-size;
+
                         .expander {
                             visibility: hidden;
+
                             .circle {
-                                fill: ~"@{@{color}-diagram-expanded-func-frame-color}";
+                                fill:~"@{@{color}-diagram-expanded-func-frame-color}";
                                 cursor: pointer;
                             }
+
                             text {
                                 cursor: pointer;
                             }
+
                             &:hover {
                                 visibility: visible;
                             }
                         }
                     }
+
                     .action-invocation {
                         line {
-                            stroke: ~"@{@{color}-diagram-arrow-head-color}";
+                            stroke:~"@{@{color}-diagram-arrow-head-color}";
                             stroke-width: 1px;
                         }
-                        fill: ~"@{@{color}-diagram-arrow-head-color}";
+
+                        fill:~"@{@{color}-diagram-arrow-head-color}";
+
                         .invoke-line {
-                            stroke:#aaa;
+                            stroke: #aaa;
                             stroke-width: 0.5;
                         }
+
                         .invoke-arrowhead {
-                            stroke:#aaa;
+                            stroke: #aaa;
                             fill: #aaa;
                             stroke-width: 0;
                         }
                     }
+
                     .start-invocation {
                         line {
-                            stroke: ~"@{@{color}-diagram-arrow-head-color}";
+                            stroke:~"@{@{color}-diagram-arrow-head-color}";
                             stroke-width: 1px;
                         }
                     }
+
                     .condition {
                         .condition-case {
                             font-style: italic;
                         }
+
                         .condition-case-background {
-                            fill: ~"@{@{color}-diagram-condition-case-background-color}";
+                            fill:~"@{@{color}-diagram-condition-case-background-color}";
                         }
+
                         .label {
                             text-anchor: middle;
                         }
+
                         polyline {
-                            fill: ~"@{@{color}-diagram-condition-background-color}";
-                            stroke: ~"@{@{color}-diagram-condition-stroke-color}";
+                            fill:~"@{@{color}-diagram-condition-background-color}";
+                            stroke:~"@{@{color}-diagram-condition-stroke-color}";
                             stroke-width: @diagram-condition-stroke-width;
                         }
                     }
+
                     .condition-line {
                         fill: transparent;
-                        stroke: ~"@{@{color}-diagram-condition-line-stroke-color}";
+                        stroke:~"@{@{color}-diagram-condition-line-stroke-color}";
                         stroke-width: @diagram-condition-line-stroke-width;
                     }
+
                     .condition-block {
                         .condition-arrow-head {
-                            fill: ~"@{@{color}-diagram-condition-line-worker-arrow-head-color}";
+                            fill:~"@{@{color}-diagram-condition-line-worker-arrow-head-color}";
                         }
                     }
+
                     .hide-line {
-                        stroke: ~"@{@{color}-diagram-panel-body-background-color}";
+                        stroke:~"@{@{color}-diagram-panel-body-background-color}";
                         stroke-width: 2px;
                     }
+
                     .expanded-func {
                         .frame {
-                            stroke: ~"@{@{color}-diagram-expanded-func-frame-color}";
+                            stroke:~"@{@{color}-diagram-expanded-func-frame-color}";
                             fill: none;
                         }
+
                         .func-name {
                             font-weight: bold;
                         }
+
                         .collapser {
                             cursor: pointer;
-                            fill: ~"@{@{color}-diagram-collapse-func-color}";
+                            fill:~"@{@{color}-diagram-collapse-func-color}";
                             font-size: 10px;
                         }
+
                         .life-line {
-                            stroke: ~"@{@{color}-diagram-condition-line-stroke-color}";
+                            stroke:~"@{@{color}-diagram-condition-line-stroke-color}";
                             stroke-width: @diagram-life-line-stroke-width;
                         }
                     }
+
                     .expanded-hidden-block {
                         .frame {
-                            stroke: ~"@{@{color}-diagram-expanded-func-frame-color}";
+                            stroke:~"@{@{color}-diagram-expanded-func-frame-color}";
                             fill: none;
                         }
+
                         .collapser {
-                            stroke: ~"@{@{color}-diagram-collapse-func-color}";
+                            stroke:~"@{@{color}-diagram-collapse-func-color}";
                             cursor: pointer;
-                            fill: ~"@{@{color}-diagram-collapse-func-color}";
+                            fill:~"@{@{color}-diagram-collapse-func-color}";
                         }
                     }
                 }
+
                 .worker-block-container {
                     .hover-rect {
                         pointer-events: painted;
@@ -449,36 +511,40 @@
             .svg-dropdown-menu {
                 &.block-dropdown {
                     display: none;
-                    
+
                     &.hover,
                     &.active {
                         display: block;
                     }
                 }
+
                 .trigger {
-                    fill: ~"@{@{color}-diagram-menu-trigger-background-color}";
+                    fill:~"@{@{color}-diagram-menu-trigger-background-color}";
 
                     text {
-                        fill: ~"@{@{color}-diagram-menu-trigger-text-color}";
+                        fill:~"@{@{color}-diagram-menu-trigger-text-color}";
                     }
                 }
+
                 .content {
                     .item {
                         cursor: pointer;
-                        fill: ~"@{@{color}-diagram-menu-item-background-color}";
+                        fill:~"@{@{color}-diagram-menu-item-background-color}";
 
                         text {
                             cursor: pointer;
-                            fill: ~"@{@{color}-diagram-menu-item-text-color}";
+                            fill:~"@{@{color}-diagram-menu-item-text-color}";
                         }
+
                         &:hover {
                             .item-body {
-                                fill: ~"@{@{color}-diagram-menu-item-hover-background-color}";
+                                fill:~"@{@{color}-diagram-menu-item-hover-background-color}";
                             }
                         }
                     }
                 }
             }
+
             .source-linked-label {
                 &:hover {
                     text-decoration: underline;
@@ -486,23 +552,25 @@
                 }
             }
         }
-        
+
         .diagram-controllers {
             .ui.menu.top-menu {
                 padding: 10px;
                 width: 100%;
-                background: ~"@{@{color}-diagram-top-menu-background-color}";
+                background:~"@{@{color}-diagram-top-menu-background-color}";
 
                 .item {
                     padding: 0;
                     margin-right: 5px;
                 }
+
                 .button {
                     z-index: 1;
                 }
             }
         }
     }
+
     .endpoint-search-dialog {
         top: 15px;
     }
@@ -513,3 +581,13 @@ body.diagram {
 }
 
 .loadUIOverrides();
+
+.header-wrapper {
+    background-color: #ececec59;
+    width: auto;
+    padding: 1rem 2rem !important;
+    border-bottom: 1px solid #dadada !important;
+    border-radius: 8px;
+    margin: 1.5rem !important;
+    font-weight: 500 !important;
+}

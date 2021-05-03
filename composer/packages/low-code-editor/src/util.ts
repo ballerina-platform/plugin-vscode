@@ -27,7 +27,9 @@ export function renderDiagramEditor(options: {
         startLine: number,
         startColumn: number,
         endLine: number,
-        endColumn: number
+        endColumn: number,
+        kind: string,
+        name: string
     }
 }) {
     options.target.classList.add("composer");

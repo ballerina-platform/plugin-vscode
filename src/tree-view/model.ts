@@ -82,7 +82,8 @@ export class PackageTreeItem extends TreeItem {
                 this.startLine,
                 this.startColumn,
                 this.endLine,
-                this.endColumn
+                this.endColumn,
+                this.label
             ]
         };
     }

@@ -2,12 +2,13 @@ import { Uri } from 'vscode';
 import { getLibraryWebViewContent, WebViewOptions, getComposerWebViewOptions, log } from '../utils';
 // import fileUriToPath = require('file-uri-to-path');
 
-export function render(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number)
+export function render(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number, kind: string, name: string)
     : string {
-    return renderDiagram(filePath, startLine, startColumn, endLine, endColumn);
+    return renderDiagram(filePath, startLine, startColumn, endLine, endColumn, kind, name);
 }
 
-function renderDiagram(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number): string {
+function renderDiagram(filePath: Uri, startLine: number, startColumn: number, endLine: number, endColumn: number,
+    kind: string, name: string): string {
 
     const body = `
         <div id="warning"></div>
@@ -61,6 +62,11 @@ function renderDiagram(filePath: Uri, startLine: number, startColumn: number, en
     log('startColumn: ' + startColumn);
     log('end: ' + endLine);
     log('endColumn: ' + endColumn);
+
+    name = name.split(' ').pop()!;
+    kind = kind.charAt(0).toUpperCase() + kind.slice(1);
+    log('kind: ' + kind);
+    log('name: ' + name);
     const scripts = `
         function loadedScript() {
             window.langclient = getLangClient();
@@ -69,6 +75,8 @@ function renderDiagram(filePath: Uri, startLine: number, startColumn: number, en
             let startColumn = ${JSON.stringify(startColumn.toString())};
             let endLine = ${JSON.stringify(endLine.toString())};
             let endColumn = ${JSON.stringify(endColumn.toString())};
+            let name = ${JSON.stringify(name)};
+            let kind = ${JSON.stringify(kind)};
             function drawDiagram() {
                 try {
                     let width = window.innerWidth - 6;
@@ -82,7 +90,9 @@ function renderDiagram(filePath: Uri, startLine: number, startColumn: number, en
                             startLine,
                             startColumn,
                             endLine,
-                            endColumn
+                            endColumn,
+                            name,
+                            kind
                         }
                     };
                     const diagram = ballerinaComposer.renderDiagramEditor(options);
